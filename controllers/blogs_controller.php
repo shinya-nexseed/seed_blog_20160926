@@ -1,7 +1,7 @@
 <?php
     require('models/blog.php');
 
-    echo 'blogs_controller.phpが呼び出されました。';
+    special_echo('blogs_controller.phpが呼び出されました。');
 
     // インスタンス化
     $controller = new BlogsController();
@@ -10,6 +10,10 @@
     switch ($action) {
       case 'index':
         $controller->index();
+        break;
+
+      case 'show':
+        $controller->show($id);
         break;
 
       default:
@@ -22,24 +26,36 @@
 
         // プロパティ
         private $blog;
+        private $resource;
+        private $action;
+        private $viewOptions;
 
         function __construct() {
-            $this->blog = new blog();
+            $this->blog = new Blog();
+            $this->resource = 'blogs';
+            $this->action = 'index';
+            $this->viewOptions = array();
         }
 
         //  一覧ページ表示アクション
         function index() {
-            echo 'Controllerのindex()が呼び出されました。';
+            special_echo('Controllerのindex()が呼び出されました。');
             // モデルを呼び出してデータを返り値として取得
-            $this->blog->index();
+            $this->viewOptions = $this->blog->index();
 
             // データをViewに送る
-            require('views/blogs/index.php');
+            $this->display();
         }
 
         // 詳細ページ表示アクション
-        function show() {
-            echo 'Controllerのshow()が呼び出されました。';
+        function show($id) {
+            special_echo('Controllerのshow()が呼び出されました。');
+            special_echo('$idは' . $id . 'です。');
+        }
+
+        // Viewを表示するメソッド
+        function display() {
+            require('views/layouts/application.php');
         }
     }
  ?>
