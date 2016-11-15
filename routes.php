@@ -16,8 +16,15 @@
     $resource = $parameters[0];
     $action = $parameters[1];
     $id = 1;
+    $post = array();
+
     if (isset($parameters[2])) {
         $id = $parameters[2];
+    }
+
+    if (!empty($_POST)) {
+        // $post = array('title' => 'タイトル', 'body' => '本文');
+        $post = $_POST;
     }
 
     // Contollers内のリソース名にふさわしいcontrollerファイルを呼び出し

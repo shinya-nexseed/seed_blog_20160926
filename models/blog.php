@@ -29,8 +29,53 @@
             // var_dump($rtn);
             return $rtn;
         }
+
+        function show($id) {
+            special_echo('モデルのshowメソッド呼び出し');
+            special_echo('$idは' . $id . 'です(モデル内)');
+
+            // パラメータから取得した$idを元に記事データ一件取得
+                // WHERE `id` = $id ← この条件でデータを取得します
+            $sql = 'SELECT * FROM `blogs` WHERE `delete_flag` = 0 AND `id` = ' . $id;
+            $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+
+            $rtn = mysqli_fetch_assoc($results);
+            return $rtn;
+        }
+
+        function create($post) {
+            $sql = sprintf('INSERT INTO `blogs` SET `title` = "%s",
+                                                    `body` = "%s",
+                                                    `delete_flag` = 0,
+                                                    `created` = NOW()',
+                        mysqli_real_escape_string($this->dbconnect,$post['title']),
+                        mysqli_real_escape_string($this->dbconnect,$post['body'])
+                    );
+            mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+        }
+
+        function edit($id) {
+            $sql = 'SELECT * FROM `blogs` WHERE `delete_flag` = 0 AND `id` = ' . $id;
+            $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+
+            $rtn = mysqli_fetch_assoc($results);
+            return $rtn;
+        }
+
+        function update($post) {
+            $sql = sprintf('UPDATE `blogs` SET `title` = "%s", `body` = "%s"
+                                           WHERE `id` = %d',
+                        mysqli_real_escape_string($this->dbconnect,$post['title']),
+                        mysqli_real_escape_string($this->dbconnect,$post['body']),
+                        $post['id']
+                    );
+            mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+        }
     }
  ?>
+
+
+
 
 
 
