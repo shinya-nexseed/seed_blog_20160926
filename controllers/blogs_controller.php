@@ -1,5 +1,6 @@
 <?php
     require('models/blog.php');
+    require('models/user.php');
 
     special_echo('blogs_controller.phpが呼び出されました。');
 
@@ -13,7 +14,7 @@
         break;
 
       case 'show':
-        $controller->show($id);
+        $controller->show($option);
         break;
 
       case 'add':
@@ -29,11 +30,15 @@
         break;
 
       case 'edit':
-        $controller->edit($id);
+        $controller->edit($option);
         break;
 
       case 'update':
         $controller->update($post);
+        break;
+
+      case 'delete':
+        $controller->delete($option);
         break;
 
       default:
@@ -50,11 +55,15 @@
         private $action;
         private $viewOptions;
 
+        private $user;
+
         function __construct() {
             $this->blog = new Blog();
             $this->resource = 'blogs';
             $this->action = 'index';
             $this->viewOptions = array();
+
+            $this->user = new User();
         }
 
         //  一覧ページ表示アクション
@@ -68,10 +77,14 @@
         }
 
         // 詳細ページ表示アクション
-        function show($id) {
+        function show($option) {
+            // ログイン判定
+            $user = $this->user->is_login();
+
             special_echo('Controllerのshow()が呼び出されました。');
-            special_echo('$idは' . $id . 'です。');
-            $this->viewOptions = $this->blog->show($id); // 戻り値 $rtnを受け取る
+            special_echo('$idは' . $option . 'です。');
+            special_var_dump($user);
+            $this->viewOptions = $this->blog->show($option); // 戻り値 $rtnを受け取る
             // special_var_dump($this->viewOptions);
             $this->action = 'show';
             $this->display();
@@ -89,11 +102,11 @@
             header('Location: index');
         }
 
-        function edit($id) {
+        function edit($option) {
             special_echo('Controllerのedit()が呼び出されました。');
 
             // model処理
-            $this->viewOptions = $this->blog->edit($id);
+            $this->viewOptions = $this->blog->edit($option);
 
             $this->action = 'edit';
             $this->display();
@@ -102,6 +115,12 @@
         function update($post) {
             $this->blog->update($post);
             header('Location: index');
+        }
+
+        function delete($option) {
+            special_echo('Controllerのdelete()が呼び出されました。');
+            $this->blog->delete($option);
+            // header('Location: ../index');
         }
 
         // Viewを表示するメソッド

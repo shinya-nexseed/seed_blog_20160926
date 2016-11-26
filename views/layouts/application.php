@@ -35,6 +35,7 @@
               <a class="navbar-brand" href="index.html">
                 <span class="strong-title"><i class="fa fa-pencil-square-o"></i> Seed Blog</span>
               </a>
+              <a href="/seed_blog/users/logout">Logout</a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -46,7 +47,7 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-md-4 content-margin-top">
+      <div class="col-xs-8 col-xs-offset-2 content-margin-top">
         <?php
             include('views/' . $this->resource . '/' . $this->action . '.php');
          ?>

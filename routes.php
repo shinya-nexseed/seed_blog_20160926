@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require('functions.php');
     special_echo('routes.phpを通りました');
     // http://192.168.33.10/seed_blog/ほげ
@@ -15,11 +16,11 @@
     // GETパラメータで指定されたリソース名とアクション名を取得
     $resource = $parameters[0];
     $action = $parameters[1];
-    $id = 1;
+    $option = 1;
     $post = array();
 
     if (isset($parameters[2])) {
-        $id = $parameters[2];
+        $option = $parameters[2];
     }
 
     if (!empty($_POST)) {

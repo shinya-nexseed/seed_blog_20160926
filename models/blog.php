@@ -30,13 +30,13 @@
             return $rtn;
         }
 
-        function show($id) {
+        function show($option) {
             special_echo('モデルのshowメソッド呼び出し');
-            special_echo('$idは' . $id . 'です(モデル内)');
+            special_echo('$idは' . $option . 'です(モデル内)');
 
             // パラメータから取得した$idを元に記事データ一件取得
-                // WHERE `id` = $id ← この条件でデータを取得します
-            $sql = 'SELECT * FROM `blogs` WHERE `delete_flag` = 0 AND `id` = ' . $id;
+                // WHERE `option` = $option ← この条件でデータを取得します
+            $sql = 'SELECT * FROM `blogs` WHERE `delete_flag` = 0 AND `id` = ' . $option;
             $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
 
             $rtn = mysqli_fetch_assoc($results);
@@ -54,8 +54,8 @@
             mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
         }
 
-        function edit($id) {
-            $sql = 'SELECT * FROM `blogs` WHERE `delete_flag` = 0 AND `id` = ' . $id;
+        function edit($option) {
+            $sql = 'SELECT * FROM `blogs` WHERE `delete_flag` = 0 AND `id` = ' . $option;
             $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
 
             $rtn = mysqli_fetch_assoc($results);
@@ -71,8 +71,25 @@
                     );
             mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
         }
+
+        function delete($option) {
+            special_echo('モデルのdeleteメソッド呼び出し');
+            // 物理削除
+            // $sql = 'DELETE FROM `blogs` WHERE `id` =' . $option;
+
+            // 論理削除
+            $sql = 'UPDATE `blogs` SET `delete_flag` = 1 WHERE `id` =' . $option;
+
+            mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+        }
     }
  ?>
+
+
+
+
+
+
 
 
 
