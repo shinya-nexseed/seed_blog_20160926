@@ -35,10 +35,12 @@
               <a class="navbar-brand" href="index.html">
                 <span class="strong-title"><i class="fa fa-pencil-square-o"></i> Seed Blog</span>
               </a>
-              <a href="/seed_blog/users/logout">Logout</a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="/seed_blog/users/logout">Logout</a></li>
+            </ul>
           </div>
           <!-- /.navbar-collapse -->
       </div>
