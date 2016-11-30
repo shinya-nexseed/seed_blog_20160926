@@ -64,23 +64,5 @@
             return $login_flag;
         }
 
-        // ログイン判定
-        function is_login() {
-            if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
-                // ログインしていると判定し、idを元にログインユーザーの情報を取得
-                $_SESSION['time'] = time();
-
-                $sql = sprintf('SELECT * FROM `users` WHERE `id`=%d',
-                               mysqli_real_escape_string($this->dbconnect, $_SESSION['id'])
-                               );
-                $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
-                $user = mysqli_fetch_assoc($record);
-                return $user;
-            } else {
-                // ログインしていないと判定し、強制的に別ページへ遷移
-                header('Location: /seed_blog/users/login');
-                exit();
-            }
-        }
     }
  ?>
