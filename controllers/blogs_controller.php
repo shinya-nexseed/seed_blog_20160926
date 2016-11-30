@@ -41,6 +41,14 @@
         $controller->delete($option);
         break;
 
+      case 'like':
+        $controller->like($option);
+        break;
+
+      case 'unlike':
+        $controller->unlike($option);
+        break;
+
       default:
         # code...
         break;
@@ -120,7 +128,19 @@
         function delete($option) {
             special_echo('Controllerのdelete()が呼び出されました。');
             $this->blog->delete($option);
-            // header('Location: ../index');
+            header('Location: ../index');
+        }
+
+        function like($option) {
+            special_echo('Controllerのlike()が呼び出されました。');
+            $this->blog->like($option);
+            header('Location: ../index');
+        }
+
+        function unlike($option) {
+            special_echo('Controllerのunlike()が呼び出されました。');
+            $this->blog->unlike($option);
+            header('Location: ../index');
         }
 
         // Viewを表示するメソッド
