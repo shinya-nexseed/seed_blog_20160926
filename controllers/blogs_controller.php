@@ -1,6 +1,5 @@
 <?php
     require('models/blog.php');
-    require('models/user.php');
 
     special_echo('blogs_controller.phpが呼び出されました。');
 
@@ -67,19 +66,16 @@
         private $action;
         private $viewOptions;
 
-        private $user;
-
         function __construct() {
             $this->blog = new Blog();
             $this->resource = 'blogs';
             $this->action = 'index';
             $this->viewOptions = array();
-
-            $this->user = new User();
         }
 
         //  一覧ページ表示アクション
         function index() {
+
             special_echo('Controllerのindex()が呼び出されました。');
             // モデルを呼び出してデータを返り値として取得
             $this->viewOptions = $this->blog->index();
@@ -90,12 +86,10 @@
 
         // 詳細ページ表示アクション
         function show($option) {
-            // ログイン判定
-            $user = $this->user->is_login();
 
             special_echo('Controllerのshow()が呼び出されました。');
             special_echo('$idは' . $option . 'です。');
-            special_var_dump($user);
+
             $this->viewOptions = $this->blog->show($option); // 戻り値 $rtnを受け取る
             // special_var_dump($this->viewOptions);
             $this->action = 'show';
@@ -103,6 +97,7 @@
         }
 
         function add() {
+
             special_echo('Controllerのadd()が呼び出されました。');
             $this->action = 'add';
             $this->display();
@@ -115,6 +110,7 @@
         }
 
         function edit($option) {
+
             special_echo('Controllerのedit()が呼び出されました。');
 
             // model処理
@@ -136,6 +132,8 @@
         }
 
         function like($option) {
+            is_login();
+
             special_echo('Controllerのlike()が呼び出されました。');
             $this->blog->like($option);
 
@@ -151,6 +149,8 @@
         }
 
         function unlike($option) {
+            is_login();
+
             special_echo('Controllerのunlike()が呼び出されました。');
             $this->blog->unlike($option);
 
