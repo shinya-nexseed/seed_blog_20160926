@@ -11,8 +11,12 @@
     </p>
     <p class="day">
       <?php echo $viewOption['created']; ?>
-      [<a href="edit/<?php echo $viewOption['id']; ?>" style="color: #00994C;">編集</a>]
-      [<a href="delete/<?php echo $viewOption['id']; ?>" style="color: #F33;">削除</a>]
+      <?php if($user = current_user()): ?>
+        <?php if($user['id'] == $viewOption['u_id']): ?>
+          [<a href="edit/<?php echo $viewOption['id']; ?>" style="color: #00994C;">編集</a>]
+          [<a href="delete/<?php echo $viewOption['id']; ?>" style="color: #F33;">削除</a>]
+        <?php endif; ?>
+      <?php endif; ?>
     </p>
   </div>
 <?php endforeach; ?>
