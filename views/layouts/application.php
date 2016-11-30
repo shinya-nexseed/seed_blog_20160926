@@ -57,7 +57,7 @@
                                           <p class="text-left"><strong><?php echo $user['name']; ?></strong></p>
                                           <p class="text-left small"><?php echo $user['email']; ?></p>
                                           <p class="text-left">
-                                              <a href="" class="btn btn-primary btn-block btn-sm">Profile設定</a>
+                                              <a href="/seed_blog/users/edit/<?php echo $user['id']; ?>" class="btn btn-primary btn-block btn-sm">Profile設定</a>
                                           </p>
                                       </div>
                                   </div>

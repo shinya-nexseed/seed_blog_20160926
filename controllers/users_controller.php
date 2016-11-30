@@ -41,6 +41,14 @@
         $controller->logout();
         break;
 
+      case 'edit':
+        $controller->edit($option);
+        break;
+
+      case 'update':
+        $controller->update($post);
+        break;
+
       default:
         # code...
         break;
@@ -153,6 +161,18 @@
 
             header('Location: /seed_blog/users/login');
             exit();
+        }
+
+        function edit($option) {
+            special_echo('Controllerのedit()が呼び出されました。');
+            $this->viewOptions = $this->user->edit($option);
+            $this->action = 'edit';
+            $this->display();
+        }
+
+        function update($post) {
+            $this->user->update($post);
+            header('Location: ../blogs/index');
         }
 
         // Viewを表示するメソッド
