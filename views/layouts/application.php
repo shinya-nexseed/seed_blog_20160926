@@ -32,7 +32,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="index.html">
+              <a class="navbar-brand" href="/seed_blog/blogs/index">
                 <span class="strong-title"><i class="fa fa-pencil-square-o"></i> Seed Blog</span>
               </a>
           </div>
