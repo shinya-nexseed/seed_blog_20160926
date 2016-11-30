@@ -49,6 +49,10 @@
         $controller->unlike($option);
         break;
 
+      case 'likes_index':
+        $controller->likes_index();
+        break;
+
       default:
         # code...
         break;
@@ -134,13 +138,40 @@
         function like($option) {
             special_echo('Controllerのlike()が呼び出されました。');
             $this->blog->like($option);
-            header('Location: ../index');
+
+            // 遷移元がindexかlikes_indexかで遷移先をわける
+            $referer_action = get_last_referer();
+
+            if ($referer_action == 'likes_index') {
+                header('Location: ../likes_index');
+            } else {
+                header('Location: ../index');
+            }
+
         }
 
         function unlike($option) {
             special_echo('Controllerのunlike()が呼び出されました。');
             $this->blog->unlike($option);
-            header('Location: ../index');
+
+            // 遷移元がindexかlikes_indexかで遷移先をわける
+            $referer_action = get_last_referer();
+
+            if ($referer_action == 'likes_index') {
+                header('Location: ../likes_index');
+            } else {
+                header('Location: ../index');
+            }
+        }
+
+        function likes_index() {
+            special_echo('Controllerのlikes_index()が呼び出されました。');
+            // モデルを呼び出してデータを返り値として取得
+            $this->viewOptions = $this->blog->likes_index();
+
+            $this->action = 'likes_index';
+            // データをViewに送る
+            $this->display();
         }
 
         // Viewを表示するメソッド

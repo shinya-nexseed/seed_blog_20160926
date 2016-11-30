@@ -39,6 +39,7 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+              <li><a href="/seed_blog/blogs/likes_index">Like記事一覧</a></li>
               <li><a href="/seed_blog/users/logout">Logout</a></li>
             </ul>
           </div>
